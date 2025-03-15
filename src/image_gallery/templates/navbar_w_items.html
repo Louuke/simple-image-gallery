@@ -6,8 +6,8 @@
                 </svg></span><span class="fw-bold">ImageGallery</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-3"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navcol-3">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link active" href="/">Gallery</a></li>
-                <li class="nav-item"><a class="nav-link" href="diashow.html">Diashow</a></li>
+                <li class="nav-item"><a class="nav-link active" href="{{ url_for('index.index') }}">Gallery</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('diashow.diashow') }}">Diashow</a></li>
             </ul><button class="btn btn-primary position-relative visually-hidden" type="button"><a class="stretched-link link-light" href="signin.html">Sign in</a></button>
         </div>
     </div>
