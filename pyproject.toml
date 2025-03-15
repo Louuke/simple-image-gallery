@@ -1,0 +1,33 @@
+[build-system]
+requires = [ 'setuptools>=69.1.1', 'setuptools-git-versioning>=2.0,<3' ]
+build-backend = 'setuptools.build_meta'
+
+[project]
+name = 'image_gallery'
+dynamic = [ 'version' ]
+readme = 'README.md'
+license = { text = 'Apache License 2.0' }
+authors = [
+    { name = 'Louke', email = 'git@jannsen.org' }
+]
+classifiers = [
+    'Programming Language :: Python :: 3',
+    'License :: OSI Approved :: Apache License 2.0',
+    'Operating System :: OS Independent',
+    'Programming Language :: Python :: Implementation :: CPython',
+]
+dependencies = [
+    'flask>=3.1.0',
+    'flask-injector>=0.15.0'
+]
+
+[project.optional-dependencies]
+test = [
+    'pytest>=8.3.5'
+]
+
+[tool.setuptools.package-data]
+'*' = [ '*.json', '*.jpg' ]
+
+[tool.setuptools-git-versioning]
+enabled = true
