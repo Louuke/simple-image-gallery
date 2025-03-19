@@ -6,13 +6,13 @@ images_bp = Blueprint('images', __name__, url_prefix='/images')
 
 
 @images_bp.get('/<filename>')
-def get_image(filename: str, service: ImagesService):
+def send_image(filename: str, service: ImagesService):
     # Returns an image from the gallery directory
     return send_from_directory(service.gallery_directory, filename)
 
 
 @images_bp.post('')
-def download_images(service: ImagesService):
+def download_image(service: ImagesService):
     # Allows downloading a single image or a zip archive of multiple images
     images = list(request.form.keys())
     match len(images):
