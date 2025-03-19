@@ -16,11 +16,12 @@
                         <div></div>
                         <div class="d-flex align-items-center sort-toolbar-collapsing sort-toolbar-collapsing-right"><label class="form-label flex-shrink-0 me-2 mb-0 fs-7">Sort by:</label>
                             <form method="get" target="_self">
-                                <select class="border rounded border-dark form-select form-select-sm fs-7 ps-3 pe-5" onchange="this.form.submit()" name="items">
-                                    <option value="0" selected="">Random</option>
-                                    <option value="-1">Newest first</option>
-                                    <option value="1">Oldest first</option>
-                                </select></form>
+                                <select class="border rounded border-dark form-select form-select-sm fs-7 ps-3 pe-5" onchange="this.form.submit()" name="sort">
+                                    <option value="0" {% if sort == 0 %}selected{% endif %}>Random</option>
+                                    <option value="-1" {% if sort == -1 %}selected{% endif %}>Newest first</option>
+                                    <option value="1" {% if sort == 1 %}selected{% endif %}>Oldest first</option>
+                                </select>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -33,9 +34,11 @@
                         <div class="d-flex justify-content-center align-items-center">
                             <div class="carousel slide border rounded shadow" data-bs-ride="carousel" data-bs-interval="6000" id="carousel-1">
                                 <div class="carousel-inner border rounded">
-                                    <div class="carousel-item active"><img class="w-100 d-block" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" alt="Slide Image"></div>
-                                    <div class="carousel-item"><img class="w-100 d-block" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" alt="Slide Image"></div>
-                                    <div class="carousel-item"><img class="w-100 d-block" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" alt="Slide Image"></div>
+                                    {% for image in images %}
+                                    <div class="carousel-item {% if loop.first %}active{% endif %}">
+                                        <img class="w-100 d-block" src="{{ url_for('images.query_image', filename=image.name) }}" alt="Slide Image">
+                                    </div>
+                                    {% endfor %}
                                 </div>
                                 <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-bs-slide="next"><span class="carousel-control-next-icon"></span><span class="visually-hidden">Next</span></a></div>
                             </div>

@@ -13,10 +13,10 @@ def index(service: FrontendService):
     page = request.args.get('page', 1, int)
     # Get the image paths and paginate them
     image_paths = service.get_image_paths(sort)
-    images = service.paginate_images(image_paths, page, items)
+    paginated_paths = service.paginate_images(image_paths, page, items)
     # Render the template
     template_vars = {
-        'images': images,
+        'images': paginated_paths,
         'header': service.gallery_header,
         'sort': sort,
         'items': items,

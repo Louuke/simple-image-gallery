@@ -6,7 +6,7 @@ images_bp = Blueprint('images', __name__, url_prefix='/images')
 
 
 @images_bp.get('/<filename>')
-def send_image(filename: str, service: ImagesService):
+def query_image(filename: str, service: ImagesService):
     # Returns an image from the gallery directory
     return send_from_directory(service.gallery_directory, filename)
 

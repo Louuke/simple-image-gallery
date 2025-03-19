@@ -92,13 +92,13 @@
                     <section class="photo-gallery py-0 py-xl-0">
                         <div class="container">
                             <div class="row row-cols-1 row-cols-md-2 mx-auto" data-bss-baguettebox="" style="max-width: 900px;">
-                                {% for filename, ctime in images %}
+                                {% for image_path, ctime in images %}
                                 <div class="col mb-4">
                                     <div>
                                         <div class="position-relative">
-                                            <input name="{{ filename }}" type="checkbox" data-bs-toggle="tooltip" data-bss-tooltip="" class="form-check-input position-absolute selection-checkbox" autocomplete="off" title="Select image" onchange="changeSelection()">
-                                            <div class="d-flex justify-content-center"><a href="{{ url_for('images.send_image', filename=filename) }}">
-                                                <img class="rounded img-fluid shadow" src="{{ url_for('images.send_image', filename=filename) }}"></a></div>
+                                            <input name="{{ image_path.name }}" type="checkbox" data-bs-toggle="tooltip" data-bss-tooltip="" class="form-check-input position-absolute selection-checkbox" autocomplete="off" title="Select image" onchange="changeSelection()">
+                                            <div class="d-flex justify-content-center"><a href="{{ url_for('images.query_image', filename=image_path.name) }}">
+                                                <img class="rounded img-fluid shadow" src="{{ url_for('images.query_image', filename=image_path.name) }}"></a></div>
                                         </div>
                                         <div class="py-3 pe-1"><span class="badge bg-light text-dark border rounded mb-0" data-bs-toggle="tooltip" data-bss-tooltip="" title="Creation date">{{ ctime }}</span></div>
                                     </div>

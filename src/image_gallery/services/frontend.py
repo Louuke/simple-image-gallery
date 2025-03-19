@@ -25,20 +25,20 @@ class FrontendService(BaseService):
         image_paths = self._find_images()
         return self._sort_images(image_paths, sort)
 
-    def paginate_images(self, image_paths: [Path], page: int, items: int) -> [(str, str)]:
+    def paginate_images(self, image_paths: [Path], page: int, items: int) -> [(Path, str)]:
         """
-        Paginates the image paths and returns a list of tuples with the image name and creation time.
+        Paginates the image paths and returns a list of tuples with the image path and its creation time.
 
         Args:
             image_paths: list of image paths
             page: current page number
             items: number of items per page
         Returns:
-            list: paginated list of image names and creation times
+            list: paginated list of image paths with their creation time
         """
         start = (page - 1) * items
         end = start + items
-        return [(path.name, self._format_ctime(path)) for path in image_paths[start:end]]
+        return [(path, self._format_ctime(path)) for path in image_paths[start:end]]
 
     def _find_images(self) -> list[Path]:
         gallery_dir = Path(self.gallery_directory)
