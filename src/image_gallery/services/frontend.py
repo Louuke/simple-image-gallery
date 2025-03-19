@@ -64,3 +64,4 @@ class FrontendService(BaseService):
                 lst.sort(key=lambda path: path.stat().st_ctime, reverse=True)
             case _: # Random
                 random.shuffle(lst)
+        return lst

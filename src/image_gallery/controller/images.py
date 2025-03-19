@@ -12,7 +12,7 @@ def send_image(filename: str, service: ImagesService):
 
 
 @images_bp.post('')
-def download_image(service: ImagesService):
+def download_images(service: ImagesService):
     # Allows downloading a single image or a zip archive of multiple images
     images = list(request.form.keys())
     match len(images):
