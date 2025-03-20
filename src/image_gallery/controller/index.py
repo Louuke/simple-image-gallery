@@ -1,12 +1,12 @@
 from flask import Blueprint, render_template, request
 
-from image_gallery.services.frontend import FrontendService
+from image_gallery.services.images import ImageService
 
 index_bp = Blueprint('index', __name__)
 
 
 @index_bp.get('/')
-def index(service: FrontendService):
+def index(service: ImageService):
     # Get query parameters
     sort = request.args.get('sort', -1, int)
     items = request.args.get('items', 20, int)

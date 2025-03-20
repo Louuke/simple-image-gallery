@@ -1,12 +1,12 @@
 from flask import Blueprint, render_template, request
 
-from image_gallery.services.frontend import FrontendService
+from image_gallery.services.images import ImageService
 
-diashow_bp = Blueprint('diashow', __name__, url_prefix='/diashow')
+diashow_bp = Blueprint('diashow', __name__)
 
 
-@diashow_bp.get('')
-def diashow(service: FrontendService):
+@diashow_bp.get('/diashow')
+def diashow(service: ImageService):
     # Get query parameters
     sort = request.args.get('sort', 0, int)
     # Get image paths
