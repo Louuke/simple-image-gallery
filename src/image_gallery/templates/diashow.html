@@ -49,5 +49,5 @@
         </div>
     </div>
 </section>
-<input type="hidden" id="query-image-paths-url" value="{{ url_for('images.query_image_paths', sort=sort) }}">
+<input type="hidden" id="query-image-paths-url" value="{{ url_for('images.query_image_paths', sort=sort, min_items=min_items) }}">
 {% endblock %}

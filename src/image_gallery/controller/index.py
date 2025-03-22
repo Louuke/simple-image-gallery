@@ -12,7 +12,7 @@ def index(service: ImageService):
     items = request.args.get('items', 20, int)
     page = request.args.get('page', 1, int)
     # Get the image paths and paginate them
-    image_paths = service.get_image_paths(sort)
+    image_paths = service.get_image_paths(sort, min_items=1)
     paginated_paths = service.paginate_images(image_paths, page, items)
     # Render the template
     template_vars = {

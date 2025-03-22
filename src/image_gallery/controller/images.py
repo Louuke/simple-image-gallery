@@ -11,13 +11,20 @@ def query_image(filename: str, service: ImageService):
     return send_from_directory(service.gallery_directory, filename)
 
 
+@images_bp.get('/default.png')
+def query_default_image():
+    # Returns a default image
+    return send_from_directory('static', 'img/default.png')
+
+
 @images_bp.get('')
 def query_image_paths(service: ImageService):
     # Get query parameters
     sort = request.args.get('sort', 0, int)
-    image_paths = service.get_image_paths(sort)
-    urls_for = [url_for('images.query_image', filename=path.name) for path in image_paths]
-    return urls_for
+    min_items = request.args.get('min_items', service.gallery_diashow_min_batch_size, int)
+    # Get the image paths
+    image_paths = service.get_image_paths(sort, min_items=min_items)
+    return [url_for('images.query_image', filename=path.name) for path in image_paths]
 
 
 @images_bp.post('')
