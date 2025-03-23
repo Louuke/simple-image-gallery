@@ -25,7 +25,8 @@ class ImageService(BaseService):
         Returns:
             list: sorted list of image paths
         """
-        image_paths = self._find_images(default=Path(__file__).parents[1] / 'static' / 'img' / 'default.png')
+        default_path = Path(__file__).parents[1] / 'static' / 'img' / 'default.png'
+        image_paths = self._find_images(default=default_path)
         image_paths_sorted = self._sort_images(image_paths, sort)
         return self._fit_to_min_items(image_paths_sorted, min_items)
 
