@@ -1,6 +1,5 @@
 import mimetypes
 import random
-from datetime import datetime
 from io import BytesIO
 from pathlib import Path
 from zipfile import ZipFile, ZIP_DEFLATED
@@ -16,7 +15,7 @@ class ImageService(BaseService):
         super().__init__(config)
         self._file_extensions = ['jpg', 'jpeg', 'png']
 
-    def get_image_paths(self, sort: int, min_items: int = None) -> [Path]:
+    def get_image_paths(self, sort: int, min_items: int = None) -> list[Path]:
         """
         Gets a list of paths to images in the gallery directory, sorted by the sort parameter.
 
@@ -30,23 +29,8 @@ class ImageService(BaseService):
         image_paths_sorted = self._sort_images(image_paths, sort)
         return self._fit_to_min_items(image_paths_sorted, min_items)
 
-    def paginate_images(self, image_paths: [Path], page: int, items: int) -> [(Path, str)]:
-        """
-        Paginates the image paths and returns a list of tuples with the image path and its creation time.
-
-        Args:
-            image_paths: list of image paths
-            page: current page number
-            items: number of items per page
-        Returns:
-            list: paginated list of image paths with their creation time
-        """
-        start = (page - 1) * items
-        end = start + items
-        return [(path, self._format_ctime(path)) for path in image_paths[start:end]]
-
-    def create_image_archive(self, filenames: [str]) -> (bytes, str):
-        """ Creates an in-memory archive of images specified by their filenames
+    def create_image_archive(self, filenames: list[str]) -> (bytes, str):
+        """ Creates an in-memory archive of images specified by their filenames.
 
         Args:
             filenames: list of image filenames
@@ -60,7 +44,7 @@ class ImageService(BaseService):
         return buffer.getvalue(), 'application/zip'
 
     def read_image(self, filename: str) -> (bytes, str):
-        """ Reads the image from the file system and returns it
+        """ Reads the image from the file system and returns it.
 
         Args:
             filename: image filename
@@ -72,6 +56,22 @@ class ImageService(BaseService):
         with open(path, 'rb') as img:
             return img.read(), mime_type
 
+    @staticmethod
+    def paginate_image_paths(image_paths: list[Path], page: int, items: int) -> list[Path]:
+        """
+        Paginates a given list of image paths.
+
+        Args:
+            image_paths: list of image paths
+            page: current page number
+            items: number of items per page
+        Returns:
+            list: paginated list of image paths
+        """
+        start = (page - 1) * items
+        end = start + items
+        return image_paths[start:end]
+
     def _find_images(self, default: Path = None) -> list[Path]:
         gallery_dir = Path(self.gallery_directory)
         paths = []
@@ -82,21 +82,16 @@ class ImageService(BaseService):
             paths.append(default)
         return paths
 
-    def _format_ctime(self, path: Path) -> str:
-        time_format = self.gallery_image_date_format
-        ctime = path.stat().st_ctime
-        date = datetime.fromtimestamp(ctime)
-        return date.strftime(time_format)
 
     @staticmethod
-    def _fit_to_min_items(image_paths: [Path], min_items: int | None) -> [Path]:
+    def _fit_to_min_items(image_paths: [Path], min_items: int | None) -> list[Path]:
         if min_items and len(image_paths) < min_items:
             image_paths *= (min_items // len(image_paths) + 1)
             image_paths = image_paths[:min_items]
         return image_paths
 
     @staticmethod
-    def _sort_images(image_paths: [Path], sort: int) -> [Path]:
+    def _sort_images(image_paths: list[Path], sort: int) -> [Path]:
         lst = image_paths.copy()
         match sort:
             case 1:  # Ascending
