@@ -27,6 +27,9 @@ test = [
     'pytest>=8.3.5'
 ]
 
+[project.scripts]
+image_gallery = 'image_gallery.__main__:main'
+
 [tool.setuptools.package-data]
 '*' = [ '*.json', '*.jpg' ]
 
