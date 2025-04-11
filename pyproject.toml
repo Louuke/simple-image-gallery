@@ -6,13 +6,12 @@ build-backend = 'setuptools.build_meta'
 name = 'image_gallery'
 dynamic = [ 'version' ]
 readme = 'README.md'
-license = { text = 'Apache License 2.0' }
+license = 'Apache-2.0'
 authors = [
     { name = 'Louke', email = 'git@jannsen.org' }
 ]
 classifiers = [
     'Programming Language :: Python :: 3',
-    'License :: OSI Approved :: Apache License 2.0',
     'Operating System :: OS Independent',
     'Programming Language :: Python :: Implementation :: CPython',
 ]
