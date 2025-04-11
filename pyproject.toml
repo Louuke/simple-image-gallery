@@ -17,7 +17,9 @@ classifiers = [
 ]
 dependencies = [
     'flask>=3.1.0',
-    'flask-injector>=0.15.0'
+    'flask-injector>=0.15.0',
+    'pydantic-settings>=2.8.1',
+    'waitress>=3.0.2'
 ]
 
 [project.optional-dependencies]
