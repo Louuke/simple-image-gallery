@@ -8,7 +8,8 @@ images_bp = Blueprint('images', __name__, url_prefix='/images')
 @images_bp.get('/<filename>')
 def query_image(filename: str, service: ImageService):
     # Returns an image from the gallery directory
-    return send_from_directory(service.gallery_directory, filename)
+    file_path = service.find_image_path(filename)
+    return send_from_directory(file_path.parent, filename)
 
 
 @images_bp.get('/default.png')

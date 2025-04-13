@@ -1,7 +1,9 @@
 import mimetypes
 import random
+from glob import glob
 from io import BytesIO
 from pathlib import Path
+from typing import Iterable
 from zipfile import ZipFile, ZIP_DEFLATED
 
 from flask import Config
@@ -26,7 +28,7 @@ class ImageService(BaseService):
             list: sorted list of image paths
         """
         default_path = Path(__file__).parents[1] / 'static' / 'img' / 'default.png'
-        image_paths = self._find_images(default=default_path)
+        image_paths = self._find_image_paths(default=default_path)
         image_paths_sorted = self._sort_images(image_paths, sort)
         return self._fit_to_min_items(image_paths_sorted, min_items)
 
@@ -41,7 +43,8 @@ class ImageService(BaseService):
         buffer = BytesIO()
         with ZipFile(buffer, 'w', compression=ZIP_DEFLATED) as archive:
             for name in filenames:
-                archive.write(f'{self.gallery_directory}/{name}', name)
+                file_path = self.find_image_path(name)
+                archive.write(file_path, name)
         return buffer.getvalue(), 'application/zip'
 
     def read_image(self, filename: str) -> (bytes, str):
@@ -52,9 +55,9 @@ class ImageService(BaseService):
         Returns:
             tuple: image bytes and mime type
         """
-        path = f'{self.gallery_directory}/{filename}'
-        mime_type, _ = mimetypes.guess_type(path)
-        with open(path, 'rb') as img:
+        file_path = self.find_image_path(filename)
+        mime_type, _ = mimetypes.guess_type(file_path)
+        with open(file_path, 'rb') as img:
             return img.read(), mime_type
 
     @staticmethod
@@ -73,16 +76,25 @@ class ImageService(BaseService):
         end = start + items
         return image_paths[start:end]
 
-    def _find_images(self, default: Path = None) -> list[Path]:
-        gallery_dir = Path(self.gallery_directory)
+    def _find_images(self) -> Iterable[Path]:
+        for g in glob(str(self.gallery_directory)):
+            gallery_dir = Path(g)
+            for ext in self._file_extensions:
+                for img_path in gallery_dir.glob(f'*.{ext}'):
+                    yield img_path
+
+    def _find_image_paths(self, default: Path = None) -> list[Path]:
         paths = []
-        for ext in self._file_extensions:
-            for img_path in gallery_dir.glob(f'*.{ext}'):
-                paths.append(img_path)
+        for image in self._find_images():
+            paths.append(image)
         if not paths and default:
             paths.append(default)
         return paths
 
+    def find_image_path(self, filename: str) -> Path | None:
+        for image in self._find_images():
+            if image.name == filename:
+                return image
 
     @staticmethod
     def _fit_to_min_items(image_paths: [Path], min_items: int | None) -> list[Path]:
