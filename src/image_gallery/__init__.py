@@ -11,7 +11,6 @@ from image_gallery.controller import index, images, diashow
 Flask.url_for.__annotations__ = {}  # Workaround: https://github.com/python-injector/flask_injector/issues/78
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
-logger = logging.getLogger('waitress')
 
 
 def create_app() -> Flask:
