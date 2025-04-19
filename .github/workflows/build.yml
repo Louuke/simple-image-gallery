@@ -83,7 +83,7 @@ jobs:
         with:
           user: ${{ secrets.PYPI_USER }}
           password: ${{ secrets.PYPI_PWD }}
-          repository-url: ${{ secrets.PYPI_URL }}
+          repository-url: ${{ vars.PYPI_URL }}
           packages-dir: wheels
           attestations: false
           verbose: true
