@@ -3,8 +3,8 @@ from pathlib import Path
 
 import pytest
 
-from image_gallery.services.base import BaseService
-from image_gallery.utils import time
+from simple_image_gallery.services.base import BaseService
+from simple_image_gallery.utils import time
 
 
 @pytest.fixture()

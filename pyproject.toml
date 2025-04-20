@@ -3,7 +3,8 @@ requires = [ 'setuptools>=69.1.1', 'setuptools-scm>=8' ]
 build-backend = 'setuptools.build_meta'
 
 [project]
-name = 'image_gallery'
+name = 'simple-image-gallery'
+description = 'A simple image gallery web application built with Flask.'
 dynamic = [ 'version' ]
 readme = 'README.md'
 license = 'Apache-2.0'
@@ -22,13 +23,17 @@ dependencies = [
     'waitress>=3.0.2'
 ]
 
+[project.urls]
+Homepage = 'https://github.com/Louuke/simple-image-gallery'
+Repository = 'https://github.com/Louuke/simple-image-gallery.git'
+
 [project.optional-dependencies]
 test = [
     'pytest>=8.3.5'
 ]
 
 [project.scripts]
-image_gallery = 'image_gallery.__main__:main'
+simple-image-gallery = 'simple_image_gallery.__main__:main'
 
 [tool.setuptools.package-data]
 '*' = [ '*.json', '*.jpg' ]

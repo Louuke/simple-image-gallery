@@ -1,6 +1,6 @@
 from flask import Blueprint, send_from_directory, request, Response, url_for
 
-from image_gallery.services.images import ImageService
+from simple_image_gallery.services.images import ImageService
 
 images_bp = Blueprint('images', __name__, url_prefix='/images')
 

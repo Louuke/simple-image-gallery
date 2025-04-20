@@ -1,7 +1,7 @@
 from flask import Config
 from injector import Module, provider
 
-from image_gallery.services.images import ImageService
+from simple_image_gallery.services.images import ImageService
 
 
 class ServiceModule(Module):

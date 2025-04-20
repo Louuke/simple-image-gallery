@@ -4,9 +4,9 @@ import sys
 from flask import Flask
 from flask_injector import FlaskInjector
 
-from image_gallery.configuration.config import GalleryConfig
-from image_gallery.configuration.modules import ServiceModule
-from image_gallery.controller import index, images, diashow
+from simple_image_gallery.configuration.config import GalleryConfig
+from simple_image_gallery.configuration.modules import ServiceModule
+from simple_image_gallery.controller import index, images, diashow
 
 Flask.url_for.__annotations__ = {}  # Workaround: https://github.com/python-injector/flask_injector/issues/78
 

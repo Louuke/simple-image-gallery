@@ -1,7 +1,7 @@
 from flask import Flask
 from waitress import serve
 
-from image_gallery import create_app
+from simple_image_gallery import create_app
 
 
 def serve_app(app: Flask):

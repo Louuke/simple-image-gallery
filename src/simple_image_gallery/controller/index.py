@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request
 
-from image_gallery.services.images import ImageService
-from image_gallery.utils import time
+from simple_image_gallery.services.images import ImageService
+from simple_image_gallery.utils import time
 
 index_bp = Blueprint('index', __name__)
 

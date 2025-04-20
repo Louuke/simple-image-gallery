@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request
 
-from image_gallery.services.images import ImageService
+from simple_image_gallery.services.images import ImageService
 
 diashow_bp = Blueprint('diashow', __name__)
 

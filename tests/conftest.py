@@ -1,7 +1,9 @@
 from pathlib import Path
 
 import pytest
-from image_gallery import create_app
+
+from simple_image_gallery import create_app
+
 
 @pytest.fixture()
 def app():

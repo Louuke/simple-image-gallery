@@ -8,7 +8,7 @@ from zipfile import ZipFile, ZIP_DEFLATED
 
 from flask import Config
 
-from image_gallery.services.base import BaseService
+from simple_image_gallery.services.base import BaseService
 
 
 class ImageService(BaseService):

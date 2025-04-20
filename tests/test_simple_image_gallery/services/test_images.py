@@ -5,8 +5,8 @@ from zipfile import ZipFile
 
 import pytest
 
-from image_gallery.services.images import ImageService
-import image_gallery
+import simple_image_gallery
+from simple_image_gallery.services.images import ImageService
 
 
 @pytest.fixture()
@@ -46,7 +46,7 @@ class TestImageService:
                 break
 
     def test_get_image_paths_default(self, service_wo_images: ImageService):
-        default_image = Path(image_gallery.__file__).parent / 'static/img/default.png'
+        default_image = Path(simple_image_gallery.__file__).parent / 'static/img/default.png'
         image_paths = service_wo_images.get_image_paths(0, 5)
         assert 5 == len(image_paths)
         assert [default_image] * 5 == image_paths
