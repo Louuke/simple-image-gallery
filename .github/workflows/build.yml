@@ -95,7 +95,7 @@ jobs:
     if: ${{ github.event_name == 'release' && github.event.action == 'created' }}
     environment:
       name: pypi
-      url: https://pypi.org/p/image-gallery
+      url: https://pypi.org/p/simple-image-gallery
     permissions:
       id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
     steps:
