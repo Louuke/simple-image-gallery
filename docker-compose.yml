@@ -1,0 +1,12 @@
+services:
+  simple-image-gallery:
+    image: ghcr.io/louuke/simple-image-gallery:dev
+    container_name: simple-image-gallery
+    ports:
+      - "127.0.0.1:80:80"
+    volumes:
+      - ".:/images"
+    environment:
+      GALLERY_DIRECTORY: "/images"
+      GALLERY_HEADER: "my images"
+      GALLERY_IMAGE_DATE_FORMAT: "%m/%d/%Y %I:%M %p"
