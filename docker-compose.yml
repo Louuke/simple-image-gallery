@@ -1,6 +1,6 @@
 services:
   simple-image-gallery:
-    image: ghcr.io/louuke/simple-image-gallery:dev
+    image: ghcr.io/louuke/simple-image-gallery:latest
     container_name: simple-image-gallery
     ports:
       - "127.0.0.1:80:80"
