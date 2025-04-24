@@ -1,7 +1,7 @@
 name: Captive Portal Image Gallery
 services:
   simple-image-gallery:
-    image: ghcr.io/louuke/simple-image-gallery:latest
+    image: ghcr.io/louuke/simple-image-gallery:dev
     container_name: simple-image-gallery
     ports:
       - "192.168.137.1:5000:80"

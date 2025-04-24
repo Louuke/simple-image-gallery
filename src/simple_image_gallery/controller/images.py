@@ -18,7 +18,7 @@ def query_default_image():
     return send_from_directory('static', 'img/default.png')
 
 
-@images_bp.get('')
+@images_bp.get('/paths')
 def query_image_paths(service: ImageService):
     # Get query parameters
     sort = request.args.get('sort', 0, int)
@@ -28,10 +28,10 @@ def query_image_paths(service: ImageService):
     return [url_for('images.query_image', filename=path.name) for path in image_paths]
 
 
-@images_bp.post('')
+@images_bp.get('')
 def download_images(service: ImageService):
     # Allows downloading a single image or a zip archive of multiple images
-    images = list(request.form.keys())
+    images = list(request.args.keys())
     match len(images):
         case 0:  # No images selected
             return Response('No images selected', status=400)
