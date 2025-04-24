@@ -15,6 +15,7 @@ def diashow(service: ImageService):
     template_vars = {
         'sort': sort,
         'images': image_paths,
+        'header': service.gallery_header,
         'min_items': service.gallery_diashow_min_batch_size
     }
     return render_template('diashow.html', **template_vars)
