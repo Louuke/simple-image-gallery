@@ -1,0 +1,36 @@
+name: Captive Portal Image Gallery
+services:
+  simple-image-gallery:
+    image: ghcr.io/louuke/simple-image-gallery:latest
+    container_name: simple-image-gallery
+    ports:
+      - "192.168.137.1:5000:80"
+    volumes:
+      - "/home/jannsen/Pictures/studium/bachelorgraduierungangewandteundtechnischeinformatik:/images"
+    environment:
+      GALLERY_DIRECTORY: "/images"
+      GALLERY_HEADER: "my images"
+      GALLERY_IMAGE_DATE_FORMAT: "%m/%d/%Y %I:%M %p"
+  simple-http-response:
+    image: ghcr.io/louuke/simple-http-response:latest
+    container_name: simple-http-response
+    ports:
+      - "192.168.137.1:80:80"
+    environment:
+      CODE: 301
+      HEADER: '["Location: http://192.168.137.1:5000"]'
+  dnschef:
+    image: ghcr.io/louuke/dnschef-ng:latest
+    container_name: dnschef-ng
+    ports:
+      - "192.168.137.1:53:53/udp"
+    expose:
+      - 80
+    volumes:
+      - ./dnschef.toml:/etc/dnschef.toml
+    environment:
+      - INTERFACE=0.0.0.0
+      - PORT=53
+      - TCP=false
+      - IPV6=false
+      - CONFIGFILE=/etc/dnschef.toml
