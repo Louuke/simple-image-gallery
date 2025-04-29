@@ -63,7 +63,7 @@
                         <div class="mx-auto row row-cols-1 row-cols-md-2" style="max-width: 900px">
                             <div class="d-flex align-items-center col">
                                 <button class="btn btn-light btn-sm border-dark me-3" type="reset"
-                                        title="Cancel selection" onclick="cancelSelection()">
+                                        onclick="cancelSelection()">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 24 24" width="1em"
                                          fill="currentColor" class="fs-4">
                                         <path d="M0 0h24v24H0z" fill="none"></path>
@@ -76,15 +76,14 @@
                             </div>
                             <div class="d-flex align-items-center selection-toolbar-collapsing">
                                 <div class="btn-group btn-group-sm" role="group">
-                                    <button class="btn btn-outline-dark" type="button" title="Select all images"
-                                            onclick="selectAllCheckboxes()">
+                                    <button class="btn btn-outline-dark" type="button" onclick="selectAllCheckboxes()">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 24 24"
                                              width="1em" fill="currentColor" class="fs-4">
                                             <path d="M0 0h24v24H0z" fill="none"></path>
                                             <path d="M3 5h2V3c-1.1 0-2 .9-2 2zm0 8h2v-2H3v2zm4 8h2v-2H7v2zM3 9h2V7H3v2zm10-6h-2v2h2V3zm6 0v2h2c0-1.1-.9-2-2-2zM5 21v-2H3c0 1.1.9 2 2 2zm-2-4h2v-2H3v2zM9 3H7v2h2V3zm2 18h2v-2h-2v2zm8-8h2v-2h-2v2zm0 8c1.1 0 2-.9 2-2h-2v2zm0-12h2V7h-2v2zm0 8h2v-2h-2v2zm-4 4h2v-2h-2v2zm0-16h2V3h-2v2zM7 17h10V7H7v10zm2-8h6v6H9V9z"></path>
                                         </svg>
                                     </button>
-                                    <button class="btn btn-outline-dark" type="button" title="Deselect all images"
+                                    <button class="btn btn-outline-dark" type="button"
                                             onclick="deselectAllCheckboxes()">
                                         <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24"
                                              height="1em" viewBox="0 0 24 24" width="1em" fill="currentColor"
@@ -99,7 +98,7 @@
                                     </button>
                                 </div>
                                 <div class="flex-grow-1"></div>
-                                <button class="btn btn-outline-primary btn-sm" type="submit" title="Download images">
+                                <button class="btn btn-outline-primary btn-sm" type="submit">
                                     <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24"
                                          height="1em" viewBox="0 0 24 24" width="1em" fill="currentColor" class="fs-4">
                                         <g>
@@ -125,10 +124,9 @@
                                 <div class="col mb-4">
                                     <div>
                                         <div class="position-relative">
-                                            <input name="{{ image_path.name }}" type="checkbox" data-bs-toggle="tooltip"
-                                                   data-bss-tooltip=""
+                                            <input name="{{ image_path.name }}" type="checkbox"
                                                    class="form-check-input position-absolute selection-checkbox"
-                                                   autocomplete="off" title="Select image" onchange="changeSelection()">
+                                                   autocomplete="off" onchange="changeSelection()">
                                             <div class="d-flex justify-content-center"><a
                                                     href="{{ url_for('images.query_image', filename=image_path.name) }}">
                                                 <img class="rounded img-fluid shadow"
@@ -136,8 +134,7 @@
                                             </div>
                                         </div>
                                         <div class="py-3 pe-1"><span
-                                                class="badge bg-light text-dark border rounded mb-0"
-                                                data-bs-toggle="tooltip" data-bss-tooltip="" title="Creation date">{{ ctime }}</span>
+                                                class="badge bg-light text-dark border rounded mb-0">{{ ctime }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -156,9 +153,9 @@
                             <nav>
                                 <ul class="pagination">
                                     {% if page > 1 %}
-                                        {% set prev_page = page - 1%}
+                                    {% set prev_page = page - 1%}
                                     {% else %}
-                                        {% set prev_page = page %}
+                                    {% set prev_page = page %}
                                     {% endif %}
                                     <li class="page-item"><a class="page-link" aria-label="Previous"
                                                              href="{{ url_for('index.index', page=prev_page, sort=sort, items=items) }}"><span
@@ -170,9 +167,9 @@
                                         loop.index }}</a></li>
                                     {% endfor %}
                                     {% if page < total_pages %}
-                                        {% set next_page = page + 1 %}
+                                    {% set next_page = page + 1 %}
                                     {% else %}
-                                        {% set next_page = page %}
+                                    {% set next_page = page %}
                                     {% endif %}
                                     <li class="page-item"><a class="page-link" aria-label="Next"
                                                              href="{{ url_for('index.index', page=next_page, sort=sort, items=items) }}"><span
