@@ -12,4 +12,4 @@ class GalleryConfig(BaseSettings):
     GALLERY_DIRECTORY: str = Field(default_factory=os.getcwd)
     GALLERY_IMAGE_DATE_FORMAT: str = '%m/%d/%Y %I:%M %p'
     GALLERY_HEADER: str = 'my gallery'
-    GALLERY_DIASHOW_MIN_BATCH_SIZE: int = Field(default=5, gt=0)
+    GALLERY_SLIDESHOW_MIN_BATCH_SIZE: int = Field(default=5, gt=0)

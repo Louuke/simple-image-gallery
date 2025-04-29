@@ -22,7 +22,7 @@ def query_default_image():
 def query_image_paths(service: ImageService):
     # Get query parameters
     sort = request.args.get('sort', 0, int)
-    min_items = request.args.get('min_items', service.gallery_diashow_min_batch_size, int)
+    min_items = request.args.get('min_items', service.gallery_slideshow_min_batch_size, int)
     # Get the image paths
     image_paths = service.get_image_paths(sort, min_items=min_items)
     return [url_for('images.query_image', filename=path.name) for path in image_paths]

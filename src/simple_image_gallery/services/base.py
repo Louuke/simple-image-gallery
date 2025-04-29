@@ -19,5 +19,5 @@ class BaseService:
         return self._config.get('GALLERY_IMAGE_DATE_FORMAT')
 
     @property
-    def gallery_diashow_min_batch_size(self) -> int:
-        return self._config.get('GALLERY_DIASHOW_MIN_BATCH_SIZE')
+    def gallery_slideshow_min_batch_size(self) -> int:
+        return self._config.get('GALLERY_SLIDESHOW_MIN_BATCH_SIZE')
