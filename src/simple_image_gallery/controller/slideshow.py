@@ -16,6 +16,7 @@ def slideshow(service: ImageService):
         'sort': sort,
         'images': image_paths,
         'header': service.gallery_header,
+        'brand_name': service.gallery_brand_name,
         'min_items': service.gallery_slideshow_min_batch_size
     }
     return render_template('slideshow.html', **template_vars)

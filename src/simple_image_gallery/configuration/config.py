@@ -11,5 +11,6 @@ class GalleryConfig(BaseSettings):
     GALLERY_PORT: int = Field(default=8080, gt=0)
     GALLERY_DIRECTORY: str = Field(default_factory=os.getcwd)
     GALLERY_IMAGE_DATE_FORMAT: str = '%m/%d/%Y %I:%M %p'
+    GALLERY_BRAND_NAME: str = 'SimpleImageGallery'
     GALLERY_HEADER: str = 'my gallery'
     GALLERY_SLIDESHOW_MIN_BATCH_SIZE: int = Field(default=5, gt=0)

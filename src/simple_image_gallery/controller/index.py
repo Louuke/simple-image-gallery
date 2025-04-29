@@ -20,6 +20,7 @@ def index(service: ImageService):
     template_vars = {
         'images': [(path, formatted_ctime[i]) for i, path in enumerate(paginated_paths)],
         'header': service.gallery_header,
+        'brand_name': service.gallery_brand_name,
         'sort': sort,
         'items': items,
         'page': page,
