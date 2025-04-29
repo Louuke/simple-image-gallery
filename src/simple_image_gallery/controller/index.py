@@ -10,7 +10,7 @@ index_bp = Blueprint('index', __name__)
 def index(service: ImageService):
     # Get query parameters
     sort = request.args.get('sort', -1, int)
-    items = request.args.get('items', 20, int)
+    items = request.args.get('items', 25, int)
     page = request.args.get('page', 1, int)
     # Get the image paths and paginate them
     image_paths = service.get_image_paths(sort, min_items=1)
