@@ -38,6 +38,10 @@ jobs:
           docker_version=$(echo "$package_version" | tr '+' '-')
           echo "docker_version=$docker_version" >> $GITHUB_OUTPUT
 
+      # Set up QEMU for cross-platform builds
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -68,6 +72,7 @@ jobs:
           context: .
           file: Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
           tags: |
             ghcr.io/${{ steps.lower_owner.outputs.lower_owner }}/simple-image-gallery:${{ steps.extract_version.outputs.docker_version }}
             ghcr.io/${{ steps.lower_owner.outputs.lower_owner }}/simple-image-gallery:${{ steps.set_tag.outputs.tag }}
