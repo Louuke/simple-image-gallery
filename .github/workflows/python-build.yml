@@ -66,7 +66,7 @@ jobs:
       - name: Download wheel
         uses: actions/download-artifact@v4
         with:
-          path: wheels
+          path: dist
           merge-multiple: true
 
       - name: Connect to Tailnet
@@ -84,7 +84,7 @@ jobs:
           user: ${{ secrets.PYPI_USER }}
           password: ${{ secrets.PYPI_PWD }}
           repository-url: ${{ vars.PYPI_URL }}
-          packages-dir: wheels
+          packages-dir: dist
           attestations: false
           verbose: true
 
@@ -102,11 +102,11 @@ jobs:
       - name: Download wheel
         uses: actions/download-artifact@v4
         with:
-          path: wheels
+          path: dist
           merge-multiple: true
 
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          packages-dir: wheels
+          packages-dir: dist
           verbose: true
