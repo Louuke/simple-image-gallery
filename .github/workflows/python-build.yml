@@ -54,7 +54,7 @@ jobs:
       - name: Upload wheel
         uses: actions/upload-artifact@v4
         with:
-          name: image_gallery
+          name: simple-image-gallery
           path: dist/*.whl
 
   private-publish:
