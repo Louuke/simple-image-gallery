@@ -6,7 +6,6 @@ on:
       - "Build and Publish Python Package"
     types:
       - completed
-  workflow_dispatch:
 
 jobs:
   build-and-push:
@@ -15,27 +14,20 @@ jobs:
     permissions:
       packages: write
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Download wheel artifact
+        uses: actions/download-artifact@v4
         with:
-          fetch-depth: 0
+          path: wheels
+          merge-multiple: true
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.11
-
-      - name: Install package and its dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install setuptools-scm
-          pip install .
-
-      - name: Extract version
+      - name: Extract version from wheel
         id: extract_version
         run: |
-          package_version=$(python -m setuptools_scm)
-          docker_version=$(echo "$package_version" | tr '+' '-')
+          # Extract the version from the wheel file name
+          wheel_file=$(ls wheels/*.whl)
+          echo "Extracting version from $wheel_file"
+          wheel_version=$(echo "$wheel_file" | grep -oP '(?<=-)[0-9]+\.[0-9]+\.[0-9]+(?:\.[a-z0-9]+)?(?:\+[a-z0-9]+)?(?=-)')
+          docker_version=$(echo "$wheel_version" | tr '+' '-')
           echo "docker_version=$docker_version" >> $GITHUB_OUTPUT
 
       # Set up QEMU for cross-platform builds
