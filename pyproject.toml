@@ -20,6 +20,7 @@ dependencies = [
     'flask>=3.1.0',
     'flask-injector>=0.15.0',
     'pydantic-settings>=2.8.1',
+    'pydantic-extra-types>=2.10.5',
     'waitress>=3.0.2'
 ]
 

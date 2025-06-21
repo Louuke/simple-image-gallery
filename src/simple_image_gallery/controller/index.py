@@ -15,7 +15,8 @@ def index(service: ImageService):
     # Get the image paths and paginate them
     image_paths = service.get_image_paths(sort, min_items=1)
     paginated_paths = service.paginate_image_paths(image_paths, page, items)
-    formatted_ctime = [time.format_ctime(path, service.gallery_image_date_format) for path in paginated_paths]
+    formatted_ctime = [time.format_ctime(path, service.gallery_image_date_format, service.gallery_image_date_timezone)
+                       for path in paginated_paths]
     # Render the template
     template_vars = {
         'images': [(path, formatted_ctime[i]) for i, path in enumerate(paginated_paths)],
