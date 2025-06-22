@@ -1,0 +1,36 @@
+# Build stage
+FROM python:3.11-alpine AS builder
+WORKDIR /app
+
+# Dummy wheel version to avoid setuptools_scm errors
+ENV SETUPTOOLS_SCM_PRETEND_VERSION="0.0.0"
+
+# Copy pyproject.toml to be able to install dependencies
+COPY pyproject.toml .
+
+# Install dependencies
+RUN pip install --user --no-cache-dir .
+
+# Copy the build wheel
+COPY dist/*.whl .
+# Install the wheel
+RUN pip install --user --no-cache-dir --no-deps --force-reinstall *.whl
+
+# Runtime stage
+FROM python:3.11-alpine
+ENV PYTHONUNBUFFERED=1
+
+# Copy .local directory from the builder stage
+COPY --from=builder /root/.local /home/appuser/.local
+# Set up non-root user
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup \
+    && chown -R appuser:appgroup /home/appuser/.local
+USER appuser
+
+# Set PATH to include the local bin directory
+ENV PATH="/home/appuser/.local/bin:$PATH"
+ENV HOME="/home/appuser"
+
+EXPOSE 8080
+
+ENTRYPOINT ["simple-image-gallery", "--gallery_host", "0.0.0.0", "--gallery_port", "8080"]
